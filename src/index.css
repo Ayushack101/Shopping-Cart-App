@@ -146,7 +146,7 @@ Navbar
 }
 
 .navbar {
-  background-color: var(--clr-primary);
+  background-color: #6e6e75;
   padding: 1.25rem 2rem;
 }
 
@@ -160,7 +160,10 @@ Navbar
 }
 
 .navbar .logo h2 {
-  color: var(--clr-white);
+  font-family: 'Lobster', cursive;
+  font-size: 40px;
+  color: rgb(245, 241, 241);
+  font-weight: 600;
 }
 
 .right {
@@ -169,7 +172,7 @@ Navbar
 
 .right svg {
   width: 2rem;
-  fill: var(--clr-white)
+  fill: var(--clr-white);
 }
 
 .right .cart-amount {
@@ -179,7 +182,7 @@ Navbar
   width: 1.75rem;
   height: 1.75rem;
   border-radius: 50%;
-  background-color: var(--clr-primary-light);
+  background-color: maroon;
 }
 
 .right .cart-amount p {
@@ -213,7 +216,7 @@ Products
 }
 
 .product {
-  background-color: var(--clr-grey-10);
+  background-color: rgb(245, 241, 241);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -399,4 +402,8 @@ hr {
   background: var(--clr-red-light);
   color: var(--clr-red-dark);
   border-color: var(--clr-red-light);
+}
+
+.nav-bg-color {
+  background-color: rgb(234, 234, 234);
 }

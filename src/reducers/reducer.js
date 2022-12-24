@@ -1,40 +1,35 @@
 const reducer = (state, action) => {
   if (action.type === "LOADING") {
-    return { ...state, loading: true };
+    return {
+      ...state,
+      loading: true,
+    };
+  }
+  if (action.type === "PRODUCT_LOADING") {
+    return {
+      ...state,
+      productLoading: true,
+    };
   }
   if (action.type === "DISPLAY_PRODUCTS") {
-    return { ...state, product: action.payload, loading: false };
+    return {
+      ...state,
+      product: action.payload,
+      loading: false,
+      productLoading: false,
+    };
   }
   if (action.type === "ADD_TO_CART") {
     return {
       ...state,
-      cart: [
-        ...state.cart,
-        // {
-        //   id: action.payload.id,
-        //   thumbnail: action.payload.thumbnail,
-        //   price: action.payload.price,
-        //   title: action.payload.title,
-        //   qty: 1
-        // },
-        {
-          ...action.payload,
-          qty: 1,
-        },
-      ],
+      cart: [...state.cart, { ...action.payload, qty: 1 }],
     };
   }
   if (action.type === "REMOVE_FROM_CART") {
-    const newcart = state.cart.filter((item) => item.id !== action.payload);
+    const newCart = state.cart.filter((item) => item.id !== action.payload);
     return {
       ...state,
-      cart: newcart,
-    };
-  }
-  if (action.type === "REMOVE_ITEM") {
-    return {
-      ...state,
-      cart: state.cart.filter((item) => item.id !== action.payload),
+      cart: newCart,
     };
   }
   if (action.type === "CLEAR_CART") {
@@ -44,16 +39,19 @@ const reducer = (state, action) => {
     };
   }
   if (action.type === "INCREASE") {
-    let tempCart = state.cart.map((item) => {
+    let newCart = state.cart.map((item) => {
       if (item.id === action.payload) {
         return { ...item, qty: item.qty + 1 };
       }
       return item;
     });
-    return { ...state, cart: tempCart };
+    return {
+      ...state,
+      cart: newCart,
+    };
   }
   if (action.type === "DECREASE") {
-    let tempCart = state.cart
+    let newCart = state.cart
       .map((item) => {
         if (item.id === action.payload) {
           return { ...item, qty: item.qty - 1 };
@@ -61,10 +59,13 @@ const reducer = (state, action) => {
         return item;
       })
       .filter((item) => item.qty !== 0);
-    return { ...state, cart: tempCart };
+    return {
+      ...state,
+      cart: newCart,
+    };
   }
   if (action.type === "GET_TOTALS") {
-    let { total, amount } = state.cart.reduce(
+    const { total, amount } = state.cart.reduce(
       (cartTotal, cartItem) => {
         const { price, qty } = cartItem;
         const itemTotal = price * qty;
@@ -78,9 +79,11 @@ const reducer = (state, action) => {
         amount: 0,
       }
     );
-    total = parseFloat(total.toFixed(2));
-
-    return { ...state, total, amount };
+    return {
+      ...state,
+      total,
+      amount,
+    };
   }
 };
 

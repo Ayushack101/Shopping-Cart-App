@@ -1,9 +1,10 @@
 import React, { useEffect, useReducer } from "react";
 import reducer from "./reducers/reducer";
-import Product from "./components/Product";
-import Cart from "./components/Cart";
+import Cart from "./pages/Cart";
 import Navbar from "./components/Navbar";
-import Nav from "./components/Nav";
+import Home from "./pages/Home";
+import Error from "./pages/Error";
+import { Routes, Route } from "react-router-dom";
 
 const App = () => {
   const initialState = {
@@ -67,17 +68,29 @@ const App = () => {
   }
 
   return (
-    <main>
+    <>
       <Navbar amount={state.amount} />
-      <Nav dispatch={dispatch} />
-      <Product
-        product={state.product}
-        cart={state.cart}
-        productLoading={state.productLoading}
-        dispatch={dispatch}
-      />
-      <Cart cart={state.cart} total={state.total} dispatch={dispatch} />
-    </main>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home
+              product={state.product}
+              cart={state.cart}
+              productLoading={state.productLoading}
+              dispatch={dispatch}
+            />
+          }
+        ></Route>
+        <Route
+          path="/cart"
+          element={
+            <Cart cart={state.cart} total={state.total} dispatch={dispatch} />
+          }
+        ></Route>
+        <Route path="*" element={<Error />}></Route>
+      </Routes>
+    </>
   );
 };
 

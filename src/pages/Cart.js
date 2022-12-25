@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Cart = ({ cart, dispatch, total }) => {
   if (cart.length === 0) {
@@ -10,6 +11,9 @@ const Cart = ({ cart, dispatch, total }) => {
         </div>
         {/* cart footer */}
         <div className="cart-footer">
+          <Link to="/">
+            <button className="btn">back Home</button>
+          </Link>
           <hr />
           <div className="cart-total">
             <h4>
@@ -34,6 +38,9 @@ const Cart = ({ cart, dispatch, total }) => {
         <h2>your Bag</h2>
       </div>
       <div className="carts-center">
+        <Link to="/">
+          <button className="btn">back Home</button>
+        </Link>
         {/* cart items */}
         {cart.map((item) => {
           const { id, title, price, thumbnail, qty } = item;
